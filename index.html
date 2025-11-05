@@ -12,9 +12,11 @@
       color: #222;
       line-height: 1.6;
       padding: 20px;
+      direction: rtl;
+      text-align: right;
     }
 
-    h1 {
+    h1, h2 {
       text-align: center;
       color: #333;
       margin-bottom: 25px;
@@ -27,11 +29,14 @@
       border-radius: 8px;
       overflow: hidden;
       box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      direction: rtl;
+      text-align: right;
     }
 
     th, td {
-      padding: 15px;
+      padding: 12px 15px;
       text-align: right;
+      vertical-align: middle;
     }
 
     th {
@@ -44,10 +49,46 @@
       background-color: #f2f2f2;
     }
 
+    input[type="checkbox"] {
+      transform: scale(1.3);
+      margin-left: 8px;
+      cursor: pointer;
+    }
+
+    textarea {
+      width: 100%;
+      height: 150px;
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      resize: vertical;
+      direction: rtl;
+      text-align: right;
+      box-sizing: border-box;
+    }
+
+    .note-section {
+      background: white;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      margin-top: 30px;
+    }
+
+    .saved-message {
+      font-size: 14px;
+      color: #4CAF50;
+      margin-top: 5px;
+      display: none;
+    }
+
     @media (max-width: 768px) {
       table, thead, tbody, th, td, tr {
         display: block;
         width: 100%;
+        direction: rtl;
+        text-align: right;
       }
 
       tr {
@@ -55,20 +96,23 @@
         border-radius: 8px;
         background-color: white;
         box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        padding: 10px;
       }
 
       td {
         padding: 10px;
         border: none;
         display: flex;
-        justify-content: space-between;
-        align-items: center;
+        flex-direction: column;
+        align-items: flex-start;
+        text-align: right;
       }
 
       td::before {
         content: attr(data-label);
         font-weight: bold;
         color: #555;
+        margin-bottom: 5px;
       }
 
       th {
@@ -83,6 +127,7 @@
   <table>
     <thead>
       <tr>
+        <th>שאלתי ✅</th>
         <th>שאלה</th>
         <th>מתי לשאול</th>
         <th>הקשר מומלץ</th>
@@ -90,46 +135,87 @@
     </thead>
     <tbody>
       <tr>
+        <td data-label="שאלתי"><input type="checkbox" class="question-check" data-id="q1"></td>
         <td data-label="שאלה">איך אתה בדרך כלל מתחיל את היום?</td>
         <td data-label="מתי לשאול">בבוקר</td>
         <td data-label="הקשר מומלץ">כשאתם נכנסים לעסק ומתחילים לסדר את הדברים.</td>
       </tr>
       <tr>
-        <td data-label="שאלה">איך אתה עוקב אחרי הזמנות של לקוחות?</td>
-        <td data-label="מתי לשאול">במהלך העבודה</td>
-        <td data-label="הקשר מומלץ">כשאתה רואה אותו מדבר עם לקוח או רושם משהו במחברת.</td>
+        <td><input type="checkbox" class="question-check" data-id="q2"></td>
+        <td>איך אתה עוקב אחרי הזמנות של לקוחות?</td>
+        <td>במהלך העבודה</td>
+        <td>כשאתה רואה אותו מדבר עם לקוח או רושם משהו במחברת.</td>
       </tr>
       <tr>
-        <td data-label="שאלה">יש לקוחות שאתה עובד איתם כבר הרבה זמן?</td>
-        <td data-label="מתי לשאול">באמצע היום</td>
-        <td data-label="הקשר מומלץ">כשאתם מדברים על לקוח חוזר או עסקה ותיקה.</td>
+        <td><input type="checkbox" class="question-check" data-id="q3"></td>
+        <td>יש לקוחות שאתה עובד איתם כבר הרבה זמן?</td>
+        <td>באמצע היום</td>
+        <td>כשאתם מדברים על לקוח חוזר או עסקה ותיקה.</td>
       </tr>
       <tr>
-        <td data-label="שאלה">איך אתה יודע מה חסר במלאי?</td>
-        <td data-label="מתי לשאול">אחרי טיפול בהזמנה</td>
-        <td data-label="הקשר מומלץ">כשאתם פותחים את המחסן או בודקים סחורה.</td>
+        <td><input type="checkbox" class="question-check" data-id="q4"></td>
+        <td>איך אתה יודע מה חסר במלאי?</td>
+        <td>אחרי טיפול בהזמנה</td>
+        <td>כשאתם פותחים את המחסן או בודקים סחורה.</td>
       </tr>
       <tr>
-        <td data-label="שאלה">מה אתה עושה כשיש יום לחוץ או בעיה לא צפויה?</td>
-        <td data-label="מתי לשאול">בשעת מנוחה</td>
-        <td data-label="הקשר מומלץ">כשיש רגע רגוע או בהפסקת קפה.</td>
+        <td><input type="checkbox" class="question-check" data-id="q5"></td>
+        <td>מה אתה עושה כשיש יום לחוץ או בעיה לא צפויה?</td>
+        <td>בשעת מנוחה</td>
+        <td>כשיש רגע רגוע או בהפסקת קפה.</td>
       </tr>
       <tr>
-        <td data-label="שאלה">איך אתה יודע אם עסקה מסוימת הייתה רווחית?</td>
-        <td data-label="מתי לשאול">אחרי סגירת עסקה</td>
-        <td data-label="הקשר מומלץ">כשאתם מסיימים שיחה או מכירה ומסכמים את היום.</td>
+        <td><input type="checkbox" class="question-check" data-id="q6"></td>
+        <td>איך אתה יודע אם עסקה מסוימת הייתה רווחית?</td>
+        <td>אחרי סגירת עסקה</td>
+        <td>כשאתם מסיימים שיחה או מכירה ומסכמים את היום.</td>
       </tr>
       <tr>
-        <td data-label="שאלה">מה אתה חושב שהלקוחות הכי אוהבים בעסק שלנו?</td>
-        <td data-label="מתי לשאול">סוף היום</td>
-        <td data-label="הקשר מומלץ">כשאתם נחים קצת ומדברים באווירה רגועה.</td>
+        <td><input type="checkbox" class="question-check" data-id="q7"></td>
+        <td>מה אתה חושב שהלקוחות הכי אוהבים בעסק שלנו?</td>
+        <td>סוף היום</td>
+        <td>כשאתם נחים קצת ומדברים באווירה רגועה.</td>
       </tr>
       <tr>
-        <td data-label="שאלה">יש משהו שהיית רוצה שאני אלמד לעשות כדי להקל עליך?</td>
-        <td data-label="מתי לשאול">בסוף היום</td>
-        <td data-label="הקשר מומלץ">כשאתה מראה לו שאתה רוצה להשתלב ולעזור, לא לשנות.</td>
+        <td><input type="checkbox" class="question-check" data-id="q8"></td>
+        <td>יש משהו שהיית רוצה שאני אלמד לעשות כדי להקל עליך?</td>
+        <td>בסוף היום</td>
+        <td>כשאתה מראה לו שאתה רוצה להשתלב ולעזור, לא לשנות.</td>
       </tr>
     </tbody>
   </table>
+
+  <div class="note-section">
+    <h2>תובנות אישיות ושאלות חדשות</h2>
+    <textarea id="notes" placeholder="כתוב כאן מחשבות, תובנות או שאלות חדשות שצצו לך במהלך היום..."></textarea>
+    <div id="savedMsg" class="saved-message">✅ נשמר בהצלחה</div>
+  </div>
+
+  <script>
+    const notes = document.getElementById('notes');
+    const savedMsg = document.getElementById('savedMsg');
+    const checkboxes = document.querySelectorAll('.question-check');
+
+    // טען הערות שמורות
+    notes.value = localStorage.getItem('fatherBusinessNotes') || '';
+
+    // שמירה אוטומטית על הערות
+    notes.addEventListener('input', () => {
+      localStorage.setItem('fatherBusinessNotes', notes.value);
+      savedMsg.style.display = 'block';
+      setTimeout(() => savedMsg.style.display = 'none', 1000);
+    });
+
+    // טען מצבי צ'קבוקסים
+    checkboxes.forEach(box => {
+      const id = box.dataset.id;
+      const saved = localStorage.getItem('checkbox_' + id);
+      if (saved === 'true') box.checked = true;
+
+      box.addEventListener('change', () => {
+        localStorage.setItem('checkbox_' + id, box.checked);
+      });
+    });
+  </script>
 </body>
 </html>
